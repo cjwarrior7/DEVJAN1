@@ -1,23 +1,3 @@
-//top to down 
-//left to right
-// main function  ,import X
-console.log("hello world !!");
-
-let obj={
-    name:"raga",
-    place:"delhi",
-    movies:["TKSS","VCD@"],
-    "bestfreind":"Akhil"
-
-}
-let key = "name";
-
-//bracket notation
-console.log(obj.movies[1]);
-console.log( obj["bestfriend"] );
-console.log(obj[key]);
-// Sir code 
-
 // top to down
 // left to right
 
