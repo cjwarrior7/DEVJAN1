@@ -56,7 +56,8 @@ let obj = {
     place:"Queens",
     movies:["THE First AVenger" , "Winter Soldier"] ,
     skills:["MArtial Arts" , "Taekwondo"],
-    "best friend":"BUcky Barnes"
+    "best friend":"Bucky Roberts",
+    "award given":"BEST ACTOR"
 }
 
 // values acces
@@ -71,6 +72,7 @@ let key = "name";
 // console.log(obj.key);
 
 // bracket notation
-console.log(   obj[key]  );
-console.log(  obj["best friend"]  );
+console.log(obj[key]);
+console.log(obj["best friend"]);
 console.log(obj.skills[1]);
+console.log(obj["award given"]);
