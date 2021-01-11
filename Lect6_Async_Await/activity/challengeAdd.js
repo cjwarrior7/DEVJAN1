@@ -68,7 +68,7 @@ async function addchallenge(link,newTab,challenge){
     let tags = challenge["Tags"];
 
      await newTab.goto(link);
-     await newTab.waitForSelector('#name');
+     await newTab.waitForSelector('#name',{ visible:true });
      await newTab.type('#name',challengeName );
      await newTab.type('#preview',description);
      await newTab.waitForSelector('#problem_statement-container .CodeMirror.cm-s-default.CodeMirror-wrap textarea');
