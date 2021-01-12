@@ -50,15 +50,48 @@ for (let i = 0; i < addLinks.length; i++) {
     
 }
 console.log(addModeratorLinks);
-
- for (let i = 0; i < addModeratorLinks.length; i++) {
+let moderatorAllPromises = [];
+ for (let i = 0; i < 1; i++) {
        let newTab = await browser.newPage();
-       addModeratorsToSingleQuestion(addModeratorLinks[i],newTab);
+       let moderator = addModeratorsToSingleQuestion(addModeratorLinks[0],newTab);
+       moderatorAllPromises.push(moderator);
     
  }
+ await Promise.all(moderatorAllPromises);
+ console.log('moderator to all question on one page added');
 
 }
 async function addModeratorsToSingleQuestion(addModeratorLink,newTab){
     await newTab.goto(addModeratorLink);
+    await handleConfirmButton(newTab);
+    //await newTab.waitForSelector('li[data-tab="moderators"]',{visible:true});
+    //const navigationPromise = await newTab.waitForNavigation({waitUntil: "domcontentloaded"});
+    await newTab.waitForSelector('li[data-tab="moderators"]' , {visible:true});
+    await newTab.click('li[data-tab="moderators"]');
+    console.log('click moderator');
+    await newTab.waitForSelector('#moderator', {visible:true});
+   // await newTab.waitForNavigation({waitUntil: 'networkidle2'})
+    await newTab.type('#moderator',"cjwarrior7");
+    console.log('type ho gya');
+    //await newTab.waitForNavigation({waitUntil: 'networkidle2'})
+    await newTab.waitForNavigation( { timeout: 60, waitUntil: 'domcontentloaded' });
+    await newTab.click('.btn.moderator-save');
+    await newTab.click('.save-challenge.btn.btn-green');
+    await newTab.close();
+    
+
+
+}
+async function handleConfirmButton(newTab){
+  try{
+    await newTab.waitForSelector('confirm-modal',{visible:true,timeout:5000});
+    await newTab.click('#confirmBtn');
+    console.log('confirm modal clicked');
+    
+  }
+  catch(error){
+    console.log('confirm modal not clicked');
+    return ;
+  }
 }
 
