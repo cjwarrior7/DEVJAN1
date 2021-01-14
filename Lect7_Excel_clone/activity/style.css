@@ -20,8 +20,19 @@ html,body{
 }
 .cells{
     height: calc(100vh - 160px ); /*view port height* means humari window ki height se minus kiya hai 160px */
+    border: 1px solid black;
+    overflow: auto;
 }
 .sheets{
     border: 1px solid black;
     height: 35px;
 } 
+.row{
+    display: flex;/*After using this div will not remain block level means the problem is div is using 100 width*/
+
+}
+.col{
+    min-width: 70px;/*After using display:flex use min-height and min width   */
+    min-height: 30px;
+    border: 1px solid;
+}
