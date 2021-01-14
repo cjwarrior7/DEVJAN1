@@ -1,0 +1,27 @@
+*{
+    box-sizing: border-box;
+}
+html,body{
+    margin:0px;
+}
+.menu{
+    border: 1px solid black;
+    height: 40px;
+
+}
+.menu-options{
+    height: 40px;
+    border: 1px solid black;
+
+}
+.address{
+    border: 1px solid black;
+    height: 45px;
+}
+.cells{
+    height: calc(100vh - 160px ); /*view port height* means humari window ki height se minus kiya hai 160px */
+}
+.sheets{
+    border: 1px solid black;
+    height: 35px;
+} 
