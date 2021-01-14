@@ -7,7 +7,8 @@ let tab;
     try{
    let browser = await puppeteer.launch({headless : false ,
         args : ["--start-maximized"] ,
-        defaultViewport : null 
+        defaultViewport : null ,
+        ignoreHTTPSErrors: true
    });
    let page = await browser.newPage();
    let pageResponse = await page.goto('https://www.hackerrank.com/auth/login');
@@ -53,7 +54,8 @@ console.log(addModeratorLinks);
 let moderatorAllPromises = [];
  for (let i = 0; i < 1; i++) {
        let newTab = await browser.newPage();
-       let moderator = addModeratorsToSingleQuestion(addModeratorLinks[0],newTab);
+        console.log('inside loop'+addModeratorLinks[i])
+       let moderator = addModeratorsToSingleQuestion(addModeratorLinks[i],newTab);
        moderatorAllPromises.push(moderator);
     
  }
@@ -71,13 +73,21 @@ async function addModeratorsToSingleQuestion(addModeratorLink,newTab){
     console.log('click moderator');
     await newTab.waitForSelector('#moderator', {visible:true});
    // await newTab.waitForNavigation({waitUntil: 'networkidle2'})
-    await newTab.type('#moderator',"cjwarrior7");
+    await newTab.type('#moderator',"CJ");
     console.log('type ho gya');
     //await newTab.waitForNavigation({waitUntil: 'networkidle2'})
-    await newTab.waitForNavigation( { timeout: 60, waitUntil: 'domcontentloaded' });
-    await newTab.click('.btn.moderator-save');
-    await newTab.click('.save-challenge.btn.btn-green');
-    await newTab.close();
+   // await newTab.waitForNavigation( { timeout: 60, waitUntil: 'domcontentloaded' });
+     await newTab.waitFor(5000);
+    let data1 = await newTab.waitForSelector('.btn.moderator-save',{visible:true});
+    let data3 = await newTab.click('.btn.moderator-save');
+    console.log('data1'+data1+','+data3);
+   // await this.page.waitFor(5000);
+    //await newTab.$eval('.btn.moderator-save', (elem) => elem.click());
+    let data2 = await newTab.waitForSelector('.save-challenge.btn.btn-green',{visible:true});
+    let data4 = await newTab.click('.save-challenge.btn.btn-green');
+    //await newTab.$eval('.save-challenge.btn.btn-green', (elem) => elem.click());
+    console.log('data2'+data2+','+data4);
+    // await newTab.close();
     
 
 
