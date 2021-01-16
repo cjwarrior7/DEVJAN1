@@ -19,9 +19,9 @@ html,body{
     height: 45px;
 }
 .cells{
-    height: calc(100vh - 160px ); /*view port height* means humari window ki height se minus kiya hai 160px */
-    border: 1px solid black;
-    overflow: auto;
+    position: absolute;
+    top: 30px;
+    left: 40px;
 }
 .sheets{
     border: 1px solid black;
@@ -35,4 +35,42 @@ html,body{
     min-width: 70px;/*After using display:flex use min-height and min width   */
     min-height: 30px;
     border: 1px solid;
+}
+.content{
+    height: calc(100vh - 160px ); /*view port height* means humari window ki height se minus kiya hai 160px */
+    border: 1px solid black;
+    overflow: auto;
+    position:relative;
+
+
+}
+.top-row {
+    display: flex;
+    position: absolute;
+    left: 40px;
+    top: 0px;
+    background-color:lightgreen
+}
+.left-col {
+    /* display: flex; */
+    background-color: lightgreen;
+    position: absolute;
+    text-align: center;
+}
+.left-col-cell {
+    border: 1px solid black;
+    height: 30px;
+    width: 40px;
+
+}
+.top-row-cell {
+    min-height: 30px;
+    min-width: 70px;
+    border: 1px solid black;
+}
+.top-left-cell {
+    background-color: aqua;
+    border: 1px solid black;
+    height: 30px;
+    width: 40px;
 }
