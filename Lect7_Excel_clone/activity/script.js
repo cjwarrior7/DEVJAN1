@@ -23,8 +23,30 @@ $(function(){
         if(value && value != cellObject.value){
             cellObject.value = value ;
             console.log(db);
+            updatechildrens(cellObject);
         }
     })
+
+    function updatechildrens(cellObject){
+        let childrens = cellObject.childrens ;
+        for (let index = 0; index < childrens .length; index++) {
+            //const element = childrens[index];
+           let {rowId ,colId} = getRowIdColIDFromAddress(childrens[index]);
+            let childrenCellObject= db[rowId][colId];
+              //{name:"B1" , value:"30" , formula:"( A1 + A2 )" , childrens:[]};
+            let newValue = solve(childrenCellObject.formula);
+            childrenCellObject.value = newValue //db update
+            //ui update
+            $(`div[rowid=${rowId}][colid=${colId}]`).text(newValue);
+            // if childrenCellObject have atleast 1 children
+            if(childrenCellObject.childrens.length){
+                updateChildrens(childrenCellObject)
+            }
+            
+        }
+    }
+
+
 
     $('#formula').on('blur', function(){
       console.log("inside formula");
@@ -35,12 +57,12 @@ $(function(){
 
       if(formula && cellObject.formula != formula){
         cellObject.formula  = formula;
-       let value = solve(formula);
+       let value = solve(formula,cellObject);
        cellObject.value = value //dbupdate
        $(lsc).text(value); //ui update
       }
     })
-    function solve (formula){
+    function solve (formula,cellObject){
         console.log("inside solve");
         console.log(formula);
         let fcomps = formula.split(" ");
@@ -50,9 +72,13 @@ $(function(){
             if(fcomps[i][0] >= 'A' && fcomps[i][0] <= 'Z'){
              let {rowId,colId} = getRowIdColIDFromAddress(fcomps[i]);
              console.log(""+rowId.rowId+','+colId.colId);
-             let cellObject = db[rowId][colId];
-             console.log(cellObject.value)
-              formula = formula.replace(fcomps[i],cellObject.value);
+             let cellObjectOfComp = db[rowId][colId];
+             console.log(cellObjectOfComp.value)
+             if(cellObject){
+                cellObjectOfComp.childrens.push(cellObject.name);
+                cellObject.parents.push(fcomps[i]);
+             }
+              formula = formula.replace(fcomps[i],cellObjectOfComp.value);
             }
             
             
@@ -82,7 +108,11 @@ function getRowIdColIDFromAddress(address){
             let row = [];
             for (let j = 0; j < 26; j++) {
                 let name = String.fromCharCode(j+65) +(i+1);
-                let cellObject ={ name:name, value:""};
+                let cellObject ={ name:name, value:"" ,
+                formula: "",
+                childrens: [],
+                parents: []
+            };
                 row.push(cellObject); 
                 
             }
