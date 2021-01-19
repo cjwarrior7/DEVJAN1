@@ -40,7 +40,7 @@ $(function(){
             $(`div[rowid=${rowId}][colid=${colId}]`).text(newValue);
             // if childrenCellObject have atleast 1 children
             if(childrenCellObject.childrens.length){
-                updateChildrens(childrenCellObject)
+                updatechildrens(childrenCellObject)
             }
             
         }
