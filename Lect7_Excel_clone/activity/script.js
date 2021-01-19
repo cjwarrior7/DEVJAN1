@@ -22,10 +22,34 @@ $(function(){
 
         if(value && value != cellObject.value){
             cellObject.value = value ;
+            if(cellObject.formula){
+            deleteFormula(cellObject);
+            $('#formula').val(" ");
+            }
             console.log(db);
             updatechildrens(cellObject);
         }
     })
+
+    function deleteFormula(cellObject){
+        cellObject.formula = "";
+        console.log(cellObject.parents);
+        for (let i = 0; i < cellObject.parents.length ; i++) {
+            let parentName = cellObject.parents[i] ;
+            console.log(parentName);
+            let {rowId ,colId} = getRowIdColIDFromAddress(parentName);
+            let parentCellObject = db[rowId][colId];
+             //{name:"A1" , value="10" , formula:"" , childrens:["B1" , "A23" , "Z100"] , parents:[]};
+            let childrens = parentCellObject.childrens ;
+            let newchildrens = childrens.filter(function(child){
+               return child != cellObject.name ;
+            });
+             // ["A23" , "Z100"];
+            parentCellObject.childrens = newchildrens ;
+        }
+     
+        cellObject.parents = [];
+    }
 
     function updatechildrens(cellObject){
         let childrens = cellObject.childrens ;
@@ -56,10 +80,16 @@ $(function(){
       let cellObject=db[row][col];
 
       if(formula && cellObject.formula != formula){
+          // 4. formula to formula
+          if(cellObject.formula){
+            deleteFormula(cellObject);
+
+          }
         cellObject.formula  = formula;
        let value = solve(formula,cellObject);
        cellObject.value = value //dbupdate
        $(lsc).text(value); //ui update
+       updatechildrens(cellObject); //update childrens
       }
     })
     function solve (formula,cellObject){
