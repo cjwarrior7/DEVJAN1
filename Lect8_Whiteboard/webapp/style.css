@@ -8,12 +8,13 @@
     height: 100px;
     width:100vw;
     justify-content: center;
+    align-items: center;
     display: flex;
 }
 .tools{
     display: flex;
     /* background-color: crimson; */
-    height: 80px;
+    height: 80%;
     width: 80%;
     justify-content: space-evenly;
     align-items: center;
