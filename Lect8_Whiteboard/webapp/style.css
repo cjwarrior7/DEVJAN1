@@ -3,10 +3,31 @@
     margin:0px;
     padding:0px;
 }
-.tools{
-    background-color: lightgreen;
+.tool-content{
+    /* background-color: lightgreen; */
     height: 100px;
     width:100vw;
+    justify-content: center;
+    display: flex;
+}
+.tools{
+    display: flex;
+    /* background-color: crimson; */
+    height: 80px;
+    width: 80%;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 20px;
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+}
+.tool{
+    height: 54px;
+    width: 80px;
+}
+.tool img{
+    height: 100%;
+    width: 100%;
+
 }
 .drawing{
     /* background-color: lightsalmon; */
