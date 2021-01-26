@@ -39,7 +39,7 @@
   border-bottom-right-radius: 10px;
 }
 .chat-list{height: 90%;width: 100%;/* background: antiquewhite; */}
-.chat{height: 20px;border-radius: 10px;width: 200px;padding: 3px;}
+.chat{margin: 10px;border-radius: 10px;/* width: 200px; */padding: 3px;display: flex;align-items: center;}
 .left{background: white;float: left;clear: both;}
 .right{background:  #7d7cda;float: right;clear: both;}
 .chat-type-box{
