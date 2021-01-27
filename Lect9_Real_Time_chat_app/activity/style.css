@@ -40,7 +40,7 @@ border-bottom-right-radius: 10px;
 }
 .chat-list{
 height: 90%;
-width: 100%;/* background: antiquewhite; */
+overflow-y:auto;/* background: antiquewhite; */
 }
 .chat{
 margin: 10px;
@@ -72,4 +72,22 @@ border: none;
 outline: none;
 border-radius: 10px;
 font-size: 18px;
+}
+.join{
+    float: left;
+    clear: both;
+    background: darkviolet;
+    justify-content: center;
+    width: 90%;
+    max-width: none;
+    color: white;
+}
+.leave{
+    clear: both;
+    float: left;
+    width: 90%; 
+    background: red;
+    max-width: none;
+    justify-content: center;
+    color: white;
 }

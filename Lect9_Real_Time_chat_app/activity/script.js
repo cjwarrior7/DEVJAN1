@@ -19,6 +19,8 @@ send.addEventListener("click",function(){
         chatdiv.innerHTML=chatMessage.value;
         chatlist.append(chatdiv);
         chatMessage.value = '';
+        chatlist.scrollTop =  chatlist.scrollHeight ;
+        console.log(chatlist.scrollTop)
 
    }
 
